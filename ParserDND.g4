@@ -1,6 +1,6 @@
-grammar Parser;
+grammar ParserDND;
 
-import Lexer;
+import LexerDND;
 
 program: INICIO LLAV_A sentencias* LLAV_C;
 
