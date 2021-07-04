@@ -3,24 +3,24 @@ import LexerDND;
 
 program: BEGIN statement* END;
 
-statement: declaracion
-			| asignacion 
-			| readSentence
-			| iteracion
-			| pregunta 
-			| operacion
-			| printSentence
-			| comentario;
+statement: declaracion SEMIC
+			| asignacion SEMIC
+			| readSentence SEMIC
+			| iteracion SEMIC
+			| pregunta SEMIC
+			| operacion SEMIC
+			| printSentence SEMIC
+			| comentario ;
 
 comentario: COMENTARIOS;
 
-declaracion: tipo_dato nombre ES valor | tipo_dato nombre ES operacion | tipo_dato nombre | tipo_dato nombre ES NUM ;
+declaracion: tipo_dato nombre ES valor | tipo_dato nombre ES operacion | tipo_dato nombre ;
 
-asignacion: nombre ES valor | valor ES  operacion;
+asignacion: nombre ES valor | nombre ES  operacion;
 
 readSentence: READ PARIZQ nombre PARDER;
 
-printSentence: PRINTLN PARIZQ (COM ID COM | valor | COM ID COM COMA valor) PARDER;
+printSentence: PRINTLN PARIZQ (COM valor COM | nombre | COM ID COM COMA valor) PARDER;
 
 operacion: (valor reformular valor);	//this is weird
 
@@ -38,7 +38,7 @@ iter_while: WHILE PARIZQ condition PARDER LLAVIZQ statement+ LLAVDER;
 
 iter_for: FOR PARIZQ ID ES NUM SEMIC condition SEMIC recorrer PARDER LLAVIZQ statement+ LLAVDER;
 
-condition: valor ( IGUAL | MAYOR | MENOR | NOTIGUAL | MAYORIGUAL | MENORIGUAL ) valor | valor ( IGUAL | MAYOR | MENOR | NOTIGUAL | MAYORIGUAL | MENORIGUAL ) valor AND | valor ( IGUAL | MAYOR | MENOR | NOTIGUAL | MAYORIGUAL | MENORIGUAL ) valor OR ;
+condition: valor comparacion valor | valor comparacion valor AND condition | valor comparacion valor OR condition;
 
 recorrer: ID ES ID (SUMAR | RESTAR) NUM;
 
