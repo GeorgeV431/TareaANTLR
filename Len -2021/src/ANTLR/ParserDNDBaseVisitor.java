@@ -1,4 +1,6 @@
-package ANTLR;// Generated from ParserDND.g4 by ANTLR 4.7.1
+package ANTLR;
+
+// Generated from ParserDND.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -94,6 +96,20 @@ public class ParserDNDBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitSinElse(ParserDNDParser.SinElseContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitIf_block(ParserDNDParser.If_blockContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitElse_block(ParserDNDParser.Else_blockContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

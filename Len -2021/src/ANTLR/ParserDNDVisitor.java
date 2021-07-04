@@ -1,4 +1,6 @@
-package ANTLR;// Generated from ParserDND.g4 by ANTLR 4.7.1
+package ANTLR;
+
+// Generated from ParserDND.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -81,6 +83,18 @@ public interface ParserDNDVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSinElse(ParserDNDParser.SinElseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserDNDParser#if_block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_block(ParserDNDParser.If_blockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserDNDParser#else_block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElse_block(ParserDNDParser.Else_blockContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserDNDParser#comparacion}.
 	 * @param ctx the parse tree

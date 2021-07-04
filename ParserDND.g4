@@ -29,9 +29,13 @@ operacion: ((valor|nombre) reformular (valor|nombre));	//this is weird
 
 reformular: SUMAR | RESTAR | DIVIDIR | MULTIPLICAR | RESTO;
 
-pregunta: IF PARIZQ (valor|nombre) condition (valor|nombre) PARDER LLAVIZQ sinElse LLAVDER;
+pregunta: IF PARIZQ condition PARDER LLAVIZQ sinElse LLAVDER;
 
-sinElse: (statement+ LLAVDER ELSE LLAVIZQ statement+ | statement+);
+sinElse: (if_block LLAVDER ELSE LLAVIZQ if_block | if_block);
+
+if_block: statement+;
+
+else_block: statement+;
 
 comparacion: IGUAL | MAYOR | MENOR | NOTIGUAL | MAYORIGUAL | MENORIGUAL;
 

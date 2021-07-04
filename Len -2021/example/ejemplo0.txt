@@ -1,30 +1,19 @@
 Fabricate
-
-	StoneShape num = 10;
-	DetectGoodAndEvil bool=Good;
-	Message msg= "warrior";
-	Message self;
-	StoneShape num2 = 5;
-	StoneShape num3;
-	StoneShape j=0;
-	StoneShape i=0;
 	
-	Sending("Hello",msg);
-	Sending("ingresa nombre");
+	StoneShape num1 = 0;
+	StoneShape num2 = 2;
 	
-
-	num2 = num+num2;
-
-
-	Haste(num<num2){
-		num=num+1;
-		Sending(num);
-		Identify(){
-		}
+	
+	
+	Identify( num1 == num2 ){
+		
+		Sending( "num 1 == num 2");
+		
+	}Nondetection{
+		
+		Sending( "num 1 != num 2");
+	
 	};
-
-	num2= AbsorbElements(num2);
-	Sending(num2);
 	
 
 Bane

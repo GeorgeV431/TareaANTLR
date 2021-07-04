@@ -12,6 +12,7 @@ import ANTLR.ParserDNDParser.ComparacionContext;
 import ANTLR.ParserDNDParser.ConditionContext;
 import ANTLR.ParserDNDParser.DeclaracionContext;
 import ANTLR.ParserDNDParser.FuncionContext;
+import ANTLR.ParserDNDParser.If_blockContext;
 import ANTLR.ParserDNDParser.Iter_forContext;
 import ANTLR.ParserDNDParser.Iter_whileContext;
 import ANTLR.ParserDNDParser.OperacionContext;
@@ -373,19 +374,10 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 
 	        return 0;
 	}
-	//-------------- If					 	-----------//
-	@Override
-	public Integer visitPregunta(PreguntaContext ctx){
-		if(visitCondition(ctx.condition())==1) {
-			visitSinElse(ctx.sinElse());
-		}
-		return 0;
-	}
-		
 	//-------------- Comparar Variables 	-----------//
 	@Override
 	public Integer visitComparacion(ComparacionContext ctx){
-		
+			
 		if(ctx.IGUAL() != null){
 			return 1;
 		}
@@ -407,23 +399,32 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 		return 0;
 
 	}
-	//-------------- Sinelse		-----------//
-	@Override
-	public Integer visitSinElse(SinElseContext ctx){
-		int i=0;
-		if(ctx.ELSE()==null) {
-			for(i=0;i<ctx.statement().size();i++) {
-				visitStatement(ctx.statement(i));
-				
-			}
-		}
-		for(i=0;i<ctx.statement().size();i++) {
-			visitStatement(ctx.statement(i));
-			
-		}	
 		
+	//-------------- If					 	-----------//
+	@Override
+	public Integer visitPregunta(PreguntaContext ctx){
+		if(visitCondition(ctx.condition())==1) {
+			visitIf_block(ctx.sinElse().if_block(0));
+			
+		}else {
+			if(ctx.sinElse().if_block().size() > 1) {
+				visitIf_block(ctx.sinElse().if_block(1));
+			}
+			
+		}
 		return 0;
 	}
+	
+	@Override
+	public Integer visitIf_block(If_blockContext ctx){
+		
+		for(int i=0;i<ctx.statement().size();i++) {
+				visitStatement(ctx.statement(i));
+		}	
+			
+		return 0;
+	}
+		
 	
 	//-------------- Iteracion - for		-----------//
 	@Override
@@ -439,11 +440,8 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 		}
 		
 		variables.replace(id, ctx.NUM().getText());
-		System.out.println("Inicio: "+ctx.NUM().getText());
 		
 		while(visitCondition(ctx.condition()) == 1) {
-			
-			System.out.println("Iterador: "+variables.get(id));
 			
 			for(int j=0; j<ctx.statement().size();j++) {
 				visitStatement(ctx.statement(j));
@@ -471,8 +469,11 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	
 	@Override
 	public Integer visitCondition(ConditionContext ctx){	
-	Integer num1 = 0;
-	Integer num2 = 0; 
+	String valor1 = "";
+	String valor2 = "";
+	
+	String tipo1 = "";
+	String tipo2 = "";
 	
 	if(ctx.nombre(0) != null) {
 		if(ctx.nombre().size() > 1) {
@@ -482,10 +483,9 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 			if(variables.get(ctx.nombre(0).getText()) == "") {
 				throw new IllegalArgumentException("Variable '" + ctx.nombre(0).getText() + "' no tiene valor");
 			}
-			if(variablesTipo.get(ctx.nombre(0).getText()) != "ENTERO")
-				throw new IllegalArgumentException("Valor no es StoneShapes.");
 			
-			num1 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
+			valor1 = variables.get(ctx.nombre(0).getText());
+			tipo1 = variablesTipo.get(ctx.nombre(0).getText());
 			
 			if(!variables.containsKey(ctx.nombre(1).getText())) {
 				throw new IllegalArgumentException("Variable '" + ctx.nombre(1).getText() + "' no ha sido declarada");
@@ -493,9 +493,9 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 			if(variables.get(ctx.nombre(1).getText()) == "") {
 				throw new IllegalArgumentException("Variable '" + ctx.nombre(1).getText() + "' no tiene valor");
 			}
-			if(variablesTipo.get(ctx.nombre(1).getText()) != "ENTERO")
-				throw new IllegalArgumentException("Valor no es StoneShapes.");
-			num2 = Integer.valueOf(variables.get(ctx.nombre(1).getText()));
+			
+			valor2 = variables.get(ctx.nombre(1).getText());
+			tipo2 = variablesTipo.get(ctx.nombre(1).getText());
 			
 		}
 		
@@ -506,15 +506,14 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 			if(variables.get(ctx.nombre(0).getText()) == "") {
 				throw new IllegalArgumentException("Variable '" + ctx.nombre(0).getText() + "' no tiene valor");
 			}
-			if(variablesTipo.get(ctx.nombre(0).getText()) != "ENTERO")
-				throw new IllegalArgumentException("Valor no es StoneShapes.");
-			
 			
 			if(ctx.nombre(0) == ctx.getChild(0) ) {
-				num1 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
+				valor1 = variables.get(ctx.nombre(0).getText());
+				tipo1 = variablesTipo.get(ctx.nombre(0).getText());
 			}
 			else if(ctx.nombre(0) == ctx.getChild(2) ) {
-				num2 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
+				valor2 = variables.get(ctx.nombre(0).getText());
+				tipo2 = variablesTipo.get(ctx.nombre(0).getText());
 			}
 		}
 		
@@ -522,72 +521,182 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	
 	if(ctx.valor(0) != null) {
 		if(ctx.valor().size() > 1) {
-			if(visitValor(ctx.valor(0)) != 1)
-				throw new IllegalArgumentException("Valor no es StoneShapes.");
-			if(visitValor(ctx.valor(1)) != 1)
-				throw new IllegalArgumentException("Valor no es StoneShapes.");
+		
+			switch(visitValor(ctx.valor(0))) {
+		       case 1:
+		    	   tipo1 = "ENTERO";
+		    	   break;
+		    	   
+		       case 2:
+		    	   tipo1 = "BOOLEAN";
+		    	   break;
+		    	   
+		       case 3:
+		    	   tipo1 = "STRING";
+		    	   break;
+		       
+		       default:
+		    	   throw new IllegalArgumentException("Tipo de Valor no Valido.");
+			}
+			switch(visitValor(ctx.valor(1))) {
+		       case 1:
+		    	   tipo2 = "ENTERO";
+		    	   break;
+		    	   
+		       case 2:
+		    	   tipo2 = "BOOLEAN";
+		    	   break;
+		    	   
+		       case 3:
+		    	   tipo2 = "STRING";
+		    	   break;
+		       
+		       default:
+		    	   throw new IllegalArgumentException("Tipo de Valor no Valido.");
+			}
 			
-			
-			num1 = Integer.parseInt(ctx.valor(0).getText());
-			num2 = Integer.parseInt(ctx.valor(1).getText());
+			valor1 = ctx.valor(0).getText();
+			valor2 = ctx.valor(1).getText();
 			
 		}
 		
 		else {
-			if(visitValor(ctx.valor(0)) != 1)
-				throw new IllegalArgumentException("Valor no es StoneShapes.");
 			
 			if(ctx.valor(0) == ctx.getChild(0) ) {
-				num1 = Integer.valueOf(ctx.valor(0).getText());
+				switch(visitValor(ctx.valor(0))) {
+			       case 1:
+			    	   tipo1 = "ENTERO";
+			    	   break;
+			    	   
+			       case 2:
+			    	   tipo1 = "BOOLEAN";
+			    	   break;
+			    	   
+			       case 3:
+			    	   tipo1 = "STRING";
+			    	   break;
+			       
+			       default:
+			    	   throw new IllegalArgumentException("Tipo de Valor no Valido.");
+				}
+				valor1 = ctx.valor(0).getText();
 			}
 			else if(ctx.valor(0) == ctx.getChild(2) ) {
-				num2 = Integer.valueOf(ctx.valor(0).getText());
+				switch(visitValor(ctx.valor(0))) {
+			       case 1:
+			    	   tipo2 = "ENTERO";
+			    	   break;
+			    	   
+			       case 2:
+			    	   tipo2 = "BOOLEAN";
+			    	   break;
+			    	   
+			       case 3:
+			    	   tipo2 = "STRING";
+			    	   break;
+			       
+			       default:
+			    	   throw new IllegalArgumentException("Tipo de Valor no Valido.");
+				}
+				valor2 = ctx.valor(0).getText();
 			}
 		}
 		
 	}
 	
-	switch(visitComparacion(ctx.comparacion())) {
-	case 1:
-			if(num1==num2) {
-				 return 1;
-			}else {
-				return 0;
+	if(!tipo1.equals(tipo2))
+		throw new IllegalArgumentException("Variables no son del mismo tipo.");
+	
+	
+	switch(tipo1) {
+		case "ENTERO":
+			Integer num1 = Integer.valueOf(valor1);
+			Integer num2 = Integer.valueOf(valor2);
+			switch(visitComparacion(ctx.comparacion())) {
+			case 1:
+					if(num1==num2) {
+						 return 1;
+					}else {
+						return 0;
+					}
+			case 2:
+					if(num1>num2) {
+						 return 1;
+					}else {
+						return 0;
+					}
+			case 3:
+					if(num1<num2) {
+						 return 1;
+					}else {
+						return 0;
+					}
+			case 4:
+					if(num1!=num2) {
+						 return 1;
+					} {
+						return 0;
+					}
+			case 5:
+					if(num1>=num2) {
+						 return 1;
+					}else {
+						return 0;
+					}
+			case 6:
+					if(num1<=num2) {
+						 return 1;
+					}else {
+						return 0;
+					}
 			}
-	case 2:
-			if(num1>num2) {
-				 return 1;
-			}else {
-				return 0;
-			}
-	case 3:
-			if(num1<num2) {
-				 return 1;
-			}else {
-				return 0;
-			}
-	case 4:
-			if(num1!=num2) {
-				 return 1;
-			} {
-				return 0;
-			}
-	case 5:
-			if(num1>=num2) {
-				 return 1;
-			}else {
-				return 0;
-			}
-	case 6:
-			if(num1<=num2) {
-				 return 1;
-			}else {
-				return 0;
-			}
-
-	default:
-		//throw new IllegalArgumentException("Operacion no valida");
+	 	   break;
+	 	   
+	    case "BOOLEAN":
+	    	if(visitComparacion(ctx.comparacion()) != 1 && visitComparacion(ctx.comparacion()) != 4) {
+	    		throw new IllegalArgumentException("Comparacion no valida para Tipo de Variable."); 
+	    	}
+	    	
+	    	if(visitComparacion(ctx.comparacion()) == 1) {
+	    		if(valor1.equals(valor2))
+	    			return 1;
+	    		else
+	    			return 0;
+	    	}
+	    	
+	    	if(visitComparacion(ctx.comparacion()) == 4) {
+	    		if(!valor1.equals(valor2))
+	    			return 1;
+	    		else
+	    			return 0;
+	    	}
+	    	
+	    	break;
+	 	   
+	    case "STRING":
+	    	if(visitComparacion(ctx.comparacion()) != 1 && visitComparacion(ctx.comparacion()) != 4) {
+	    		throw new IllegalArgumentException("Comparacion no valida para Tipo de Variable."); 
+	    	}
+	    	
+	    	if(visitComparacion(ctx.comparacion()) == 1) {
+	    		if(valor1.equals(valor2))
+	    			return 1;
+	    		else
+	    			return 0;
+	    	}
+	    	
+	    	if(visitComparacion(ctx.comparacion()) == 4) {
+	    		if(!valor1.equals(valor2))
+	    			return 1;
+	    		else
+	    			return 0;
+	    	}
+	    	
+	 	   break;
+	
 	}
+	
+	
 
 	return 0;
 }
