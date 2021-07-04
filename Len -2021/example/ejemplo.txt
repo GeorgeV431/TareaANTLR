@@ -1,0 +1,50 @@
+Fabricate
+
+StoneShape num=10;
+DetectGoodAndEvil bool=Good;
+Message msg= "warrior";
+Message self;
+StoneShape num2;
+StoneShape num3;
+StoneShape j=0;
+StoneShape i=0;
+
+Sending("Hello",msg);
+Sending("ingresa nombre");
+ComprehendLanguages(msg);
+Sending("Are you evil or ",bool);
+ComprehendLanguages(self);
+
+Identify(self==Evil){
+	Sending("you are very evil ",msg);
+}Nondetection{
+	Sending("you are very good ", msg);
+};
+
+
+Sending("A Hobgoblin appears");
+Sending("Roll for intitiative");
+Sending("ingresa un numero");
+ComprehendLanguages(num2);
+
+Initiative(i=0;i<num2;i=i+1){
+	num3=num3+i;
+};
+num3=num3/num;
+num3=ControlFlames(num3);
+Sending("Your Initiative is: ",num3);
+num2=num+num2;
+
+Haste(j<num2){
+	Sending("You take 10 point of blugeoning damage");
+	
+	Identify(j==7){
+		Sending("You take a greater healing potion and recover 17 hit points");
+	}Nondetection{
+		Sending("The Hobgoblin takes 14 points of slashing damage");
+	};
+};
+Sending("You have killed the Hobgoblin, Nicely done ",msg);
+
+Bane
+
