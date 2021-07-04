@@ -3,7 +3,7 @@ Fabricate
 	DetectGoodAndEvil bool=Good;
 	Message msg= "warrior";
 	Message self;
-	StoneShape num2 = 0;
+	StoneShape num2 = 1;
 	StoneShape num3;
 	StoneShape j=0;
 	StoneShape i=0;
@@ -11,7 +11,8 @@ Fabricate
 	Sending("Hello",msg);
 	Sending("ingresa nombre");
 	
-	num2 = num+num2;
+
+	num2 = num+14;
 	Sending(num2);
 	
 

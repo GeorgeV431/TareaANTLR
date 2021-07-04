@@ -6,8 +6,10 @@ import java.util.Map;
 
 import ANTLR.ParserDNDBaseVisitor;
 import ANTLR.ParserDNDParser.AsignacionContext;
+import ANTLR.ParserDNDParser.ComparacionContext;
 import ANTLR.ParserDNDParser.DeclaracionContext;
 import ANTLR.ParserDNDParser.OperacionContext;
+import ANTLR.ParserDNDParser.PreguntaContext;
 import ANTLR.ParserDNDParser.PrintSentenceContext;
 import ANTLR.ParserDNDParser.RecorrerContext;
 import ANTLR.ParserDNDParser.ReformularContext;
@@ -222,7 +224,7 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 					num1 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
 				}
 				else if(ctx.nombre(0) == ctx.getChild(2) ) {
-					num1 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
+					num2 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
 				}
 			}
 			
@@ -249,7 +251,7 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 					num1 = Integer.valueOf(ctx.valor(0).getText());
 				}
 				else if(ctx.valor(0) == ctx.getChild(2) ) {
-					num1 = Integer.valueOf(ctx.valor(2).getText());
+					num2 = Integer.valueOf(ctx.valor(0).getText());
 				}
 			}
 			
@@ -297,7 +299,39 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	        return 0;
 	}
 	//-------------- If					 	-----------//
+	@Override
+	public Integer visitPregunta(PreguntaContext ctx){
+		
+		
+		return 0;
+
+	}
 	//-------------- Comparar Variables 	-----------//
+	@Override
+	public Integer visitComparacion(ComparacionContext ctx){
+		
+		if(ctx.IGUAL() != null){
+			return 1;
+		}
+		else if(ctx.MAYOR() != null) {
+			return 2;
+		}
+		else if(ctx.MENOR() != null) {
+			return 3;
+		}
+		else if(ctx.NOTIGUAL() != null) {
+			return 4;
+		}
+		else if(ctx.MAYORIGUAL() != null) {
+			return 5;
+		}
+		else if(ctx.MENORIGUAL() != null) {
+			return 6;
+		}
+		return 0;
+
+	}
+	
 	//-------------- Iteracion - for		-----------//
 	//-------------- Iteracion - while		-----------//
 	//-------------- RECORRER		 		-----------//
