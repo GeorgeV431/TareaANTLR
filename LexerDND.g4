@@ -11,7 +11,6 @@ CONST:'ImmovableObject';
 
 //3 tipos de datos
 ENTERO:'StoneShape';
-FLOTANTE:'Weird';
 BOOLEAN:'DetectGoodAndEvil';
 STRING: 'Message';
 
@@ -72,8 +71,9 @@ COMA:',';
 
 //Identificadores
 NUM:[0-9]+;
-ID : [a-zA-Z]+ ;  
-IDS : [a-zA-Z_][a-zA-Z0-9]* ;	// match lower-case identifiers
+STRING_LITERAL : '"'  ( ~('"'|'\n'|'\r') )* '"' ;
+ID : [a-zA-Z0-9]+ ;  
+IDS : [a-zA-Z_][a-zA-Z0-9_]* ;	// match lower-case identifiers
 WS : [ \t\r\n]+ -> skip ;		// skip spaces, tabs, newlines
 
 COMENTARIOS: '//' ~[\r\n]* -> skip ;

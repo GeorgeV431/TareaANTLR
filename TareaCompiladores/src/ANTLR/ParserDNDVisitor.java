@@ -1,4 +1,5 @@
 package ANTLR;
+
 // Generated from ParserDND.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -17,11 +18,11 @@ public interface ParserDNDVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(ParserDNDParser.ProgramContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserDNDParser#sentencias}.
+	 * Visit a parse tree produced by {@link ParserDNDParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSentencias(ParserDNDParser.SentenciasContext ctx);
+	T visitStatement(ParserDNDParser.StatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserDNDParser#comentario}.
 	 * @param ctx the parse tree

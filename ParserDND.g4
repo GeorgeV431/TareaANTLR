@@ -16,17 +16,19 @@ comentario: COMENTARIOS;
 
 declaracion: tipo_dato nombre ES valor | tipo_dato nombre ES operacion | tipo_dato nombre ;
 
-asignacion: nombre ES valor | nombre ES  operacion;
+asignacion: nombre ES (valor|nombre) | nombre ES  operacion | nombre ES funcion ;
+
+funcion: (COS | SIN | TAN | ABS) PARIZQ (valor|nombre) PARDER;
 
 readSentence: READ PARIZQ nombre PARDER;
 
-printSentence: PRINTLN PARIZQ (COM valor COM | nombre | COM ID COM COMA valor) PARDER;
+printSentence: PRINTLN PARIZQ ( valor | nombre | valor COMA nombre) PARDER;
 
-operacion: (valor reformular valor);	//this is weird
+operacion: ((valor|nombre) reformular (valor|nombre));	//this is weird
 
 reformular: SUMAR | RESTAR | DIVIDIR | MULTIPLICAR | RESTO;
 
-pregunta: IF PARIZQ valor comparacion valor PARDER LLAVIZQ sinElse LLAVDER;
+pregunta: IF PARIZQ (valor|nombre) comparacion (valor|nombre) PARDER LLAVIZQ sinElse LLAVDER;
 
 sinElse: (statement+ LLAVDER ELSE LLAVIZQ statement+ | statement+);
 
@@ -36,15 +38,15 @@ iteracion: iter_for | iter_while;
 
 iter_while: WHILE PARIZQ condition PARDER LLAVIZQ statement+ LLAVDER;
 
-iter_for: FOR PARIZQ ID ES NUM SEMIC condition SEMIC recorrer PARDER LLAVIZQ statement+ LLAVDER;
+iter_for: FOR PARIZQ nombre ES NUM SEMIC condition SEMIC recorrer PARDER LLAVIZQ statement+ LLAVDER;
 
-condition: valor comparacion valor | valor comparacion valor AND condition | valor comparacion valor OR condition;
+condition: (valor|nombre) comparacion (valor|nombre) | (valor|nombre) comparacion (valor|nombre) AND condition | (valor|nombre) comparacion (valor|nombre) OR condition;
 
-recorrer: ID ES ID (SUMAR | RESTAR) NUM;
+recorrer: nombre ES nombre (SUMAR | RESTAR) NUM;
 
-tipo_dato: ENTERO | FLOTANTE | BOOLEAN | STRING;
+tipo_dato: ENTERO | BOOLEAN | STRING;
 
-valor:  NUM | TRUE | FALSE | ID ;
+valor:  NUM | TRUE | FALSE | STRING_LITERAL ;
 
 nombre: ID;
 

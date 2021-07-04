@@ -17,28 +17,21 @@ import ANTLR.ParserDNDParser.DeclaracionContext;
 public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	private Map<String, String>  variables = new HashMap<String, String>();
 	
+	//------Declaracion de Variables-----//
 	@Override
 	public Integer visitDeclaracion(DeclaracionContext ctx){
-        String id = ctx.nombre().ID().getText();        
-        String value = "";        
+		String id = ctx.nombre().getText();        
+        String value = "";  
         
         if (variables.containsKey(id))
-            throw new IllegalArgumentException("Variable '" + id + "' ya fue declarada");
+            throw new IllegalArgumentException("Variable '" + id + "' ya fue declarada declarada");
         else {
-        	if (ctx.ID().size() > 1) {
-        		value = ctx.ID(1).getText(); 
-        	}else { 
-            	//System.out.println(id+" en else ");//+ctx.BOOLEAN_().getText());    	   
-            	if(ctx.NUMBER()!=null){
-            		value = ctx.NUMBER().getText();
-            	}else{
-            		value = ctx.STRING().getText().substring(1, ctx.STRING().getText().length()-1);          		
-            	}
-        	}
-        	variables.put(id, value);
-        }       
-        
+	    	value = ctx.valor().getText();
+	    
+	        variables.put(id, value);
+        }
         return 0;
+  
     }
 	
 	

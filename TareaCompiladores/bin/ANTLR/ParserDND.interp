@@ -106,7 +106,7 @@ COMENTARIOS
 
 rule names:
 program
-sentencias
+statement
 comentario
 declaracion
 asignacion
