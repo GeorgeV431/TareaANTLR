@@ -89,12 +89,6 @@ public interface ParserDNDVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitComparacion(ParserDNDParser.ComparacionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserDNDParser#iteracion}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIteracion(ParserDNDParser.IteracionContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ParserDNDParser#iter_while}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -6,9 +6,10 @@ program: BEGIN statement* END;
 statement: declaracion SEMIC
 			| asignacion SEMIC
 			| readSentence SEMIC
-			| iteracion SEMIC
 			| pregunta SEMIC
-			| operacion SEMIC
+			| printSentence SEMIC
+			| iter_while SEMIC
+			| iter_for SEMIC
 			| printSentence SEMIC
 			| comentario ;
 
@@ -28,13 +29,11 @@ operacion: ((valor|nombre) reformular (valor|nombre));	//this is weird
 
 reformular: SUMAR | RESTAR | DIVIDIR | MULTIPLICAR | RESTO;
 
-pregunta: IF PARIZQ (valor|nombre) comparacion (valor|nombre) PARDER LLAVIZQ sinElse LLAVDER;
+pregunta: IF PARIZQ (valor|nombre) condition (valor|nombre) PARDER LLAVIZQ sinElse LLAVDER;
 
 sinElse: (statement+ LLAVDER ELSE LLAVIZQ statement+ | statement+);
 
 comparacion: IGUAL | MAYOR | MENOR | NOTIGUAL | MAYORIGUAL | MENORIGUAL;
-
-iteracion: iter_for | iter_while;
 
 iter_while: WHILE PARIZQ condition PARDER LLAVIZQ statement+ LLAVDER;
 
