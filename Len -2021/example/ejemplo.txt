@@ -1,0 +1,32 @@
+start
+
+#ESTO ES UN COMENTARIO
+
+#DECLARACION DE VARIABLES
+
+number x;
+number y = 2;
+float z = 247.439;
+float w;
+string nombre = "Jaimico";
+boolean Fake = false;
+const float PI = 3.141592;
+
+print("Ingrese un valor");
+read(x);
+
+for(i=0;i<5;i++){
+    w = sen(69);
+}
+
+while(Fake){
+    if(w >= 4359){
+        Fake = true;
+    }else{
+        w = sqrt(6739) + w;
+    }
+}
+
+
+
+
