@@ -14,7 +14,7 @@ statement: declaracion SEMIC
 
 comentario: COMENTARIOS;
 
-declaracion: tipo_dato nombre ES valor | tipo_dato nombre ES operacion | tipo_dato nombre ;
+declaracion: tipo_dato asignacion | tipo_dato nombre ;
 
 asignacion: nombre ES (valor|nombre) | nombre ES  operacion | nombre ES funcion ;
 

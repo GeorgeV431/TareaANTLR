@@ -34,17 +34,22 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	
 	//-------------- Declarar Variables 	-----------//
 	@Override
-	public Integer visitDeclarar(DeclararContext ctx){	        
-	        String output = "";
-	        if(ctx.valor() == null && ctx.nombre() == null) {
-	        	throw new IllegalArgumentException("Funcion Sending esta vacia.");
-	        	
-	        }else if (ctx.valor() != null ) {
-	        	output = ctx.valor().getText();
-	        	
-	        }
-	        System.out.println(output);
-	        return 0;
+	public Integer visitDeclaracion(DeclaracionContext ctx){	        
+	       String id = ctx.nombre().getText();
+	       String value = "";
+	       
+	       if (variables.containsKey(id))
+	            throw new IllegalArgumentException("Variable '" + id + "' ya fue declarada");
+	       else{
+	    	   if( ctx.valor() != null ) {
+	    		   
+	    		   
+	    	   }
+	    	   
+	       }
+	       
+	       
+	       return 0;
 	}
 	
 	
