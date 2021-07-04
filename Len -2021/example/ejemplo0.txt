@@ -1,5 +1,8 @@
 Fabricate
-
-	Sending();
+	
+	StoneShape num1 = 5;
+	StoneShape num = 3;
+	
+	Sending("numero: ", num);
 
 Bane
