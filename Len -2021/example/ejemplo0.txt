@@ -12,7 +12,14 @@ Fabricate
 	Sending("ingresa nombre");
 	
 
-	num2 = num+14;
+	num2 = num+num2;
+	Sending(num2);
+
+	Identify(num2==num){
+		Sending(num2);
+	};
+
+	num2= AbsorbElements(num2);
 	Sending(num2);
 	
 
