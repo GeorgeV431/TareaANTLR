@@ -134,6 +134,7 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 		}
 			
 		if(ctx.operacion() != null) {
+			value = visitOperacion(ctx.operacion()).toString();
 			
 		}
 		if(ctx.funcion() != null) {

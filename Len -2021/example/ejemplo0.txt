@@ -1,7 +1,7 @@
 Fabricate
 	
 	StoneShape num1 = 5;
-	StoneShape num = 3;
+	StoneShape num = 3 + num1;
 	
 	Sending("numero: ", num);
 
