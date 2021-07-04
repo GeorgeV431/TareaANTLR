@@ -1,8 +1,18 @@
 Fabricate
+	StoneShape num = 10;
+	DetectGoodAndEvil bool=Good;
+	Message msg= "warrior";
+	Message self;
+	StoneShape num2 = 0;
+	StoneShape num3;
+	StoneShape j=0;
+	StoneShape i=0;
 	
-	StoneShape num1 = 5;
-	StoneShape num = 3 + num1;
+	Sending("Hello",msg);
+	Sending("ingresa nombre");
 	
-	Sending("numero: ", num);
+	num2 = num+num2;
+	Sending(num2);
+	
 
 Bane

@@ -177,134 +177,106 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	//-------------- Leer Variables 		-----------//
 	//-------------- Operar Variables	((valor|nombre) reformular (valor|nombre));	-----------//
 	@Override
-	public Integer visitOperacion(OperacionContext ctx){	
-
-	        if (!variablesTipo.containsKey(ctx.nombre(0).getText())) 
-	        	throw new IllegalArgumentException(ctx.nombre(0).getText()+"No existe");
-	        	
-	        if(!variablesTipo.containsKey(ctx.nombre(1).getText())) 
-	        	throw new IllegalArgumentException(ctx.nombre(1).getText()+ "No existe");
-	        		
-	        if(variablesTipo.get(ctx.nombre(0).getText()) != "ENTERO" ) 
-	        	throw new IllegalArgumentException(ctx.nombre(0).getText()+ "No es tipo StoneShape");
-	        			
-	        if(variablesTipo.get(ctx.nombre(1).getText()) != "ENTERO" ) 
-	        	throw new IllegalArgumentException(ctx.nombre(1).getText()+ "No es tipo StoneShape");
-	        			
-	        if (ctx.valor(0).getText()==null) 
-	        	throw new IllegalArgumentException(ctx.nombre(0).getText()+"No existe");
-	        	        	
-	        if(ctx.valor(1).getText()==null) 
-	        	throw new IllegalArgumentException(ctx.nombre(1).getText()+ "No existe");
-	    	        		
-	       switch(visitReformular(ctx.reformular())) {
-	        case 1:
-	        	if(variablesTipo.containsKey(ctx.nombre(0).getText()) && variablesTipo.containsKey(ctx.nombre(1).getText())) {
-	        		return Integer.valueOf(ctx.nombre(0).getText())+Integer.valueOf(ctx.nombre(1).getText());
-	        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(0).getText()) && ctx.valor(0).getText()!=null) {
-	        		return Integer.valueOf(ctx.nombre(0).getText())+Integer.valueOf(ctx.valor(0).getText());
-	        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(0).getText()) && ctx.valor(1).getText()!=null) {
-		        	return Integer.valueOf(ctx.nombre(0).getText())+Integer.valueOf(ctx.valor(1).getText());
-		        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(1).getText()) && ctx.valor(0).getText()!=null) {
-		        	return Integer.valueOf(ctx.nombre(1).getText())+Integer.valueOf(ctx.valor(0).getText());
-		        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(1).getText()) && ctx.valor(1).getText()!=null) {
-	        		return Integer.valueOf(ctx.nombre(1).getText())+Integer.valueOf(ctx.valor(1).getText());
-				        									
-	        	}else if(ctx.valor(0).getText()!=null && ctx.valor(1).getText()!=null) {
-	        		return Integer.valueOf(ctx.valor(0).getText())+Integer.valueOf(ctx.valor(1).getText());
-		        } 
-	        break;
-	        case 2:
-	        	if(variablesTipo.containsKey(ctx.nombre(0).getText()) && variablesTipo.containsKey(ctx.nombre(1).getText())) {
-	        		return Integer.valueOf(ctx.nombre(0).getText())-Integer.valueOf(ctx.nombre(1).getText());
-	        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(0).getText()) && ctx.valor(0).getText()!=null) {
-	        		return Integer.valueOf(ctx.nombre(0).getText())-Integer.valueOf(ctx.valor(0).getText());
-	        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(0).getText()) && ctx.valor(1).getText()!=null) {
-		        	return Integer.valueOf(ctx.nombre(0).getText())-Integer.valueOf(ctx.valor(1).getText());
-		        									
-		        }else if(variablesTipo.containsKey(ctx.nombre(1).getText()) && ctx.valor(0).getText()!=null) {
-		        	return Integer.valueOf(ctx.nombre(1).getText())-Integer.valueOf(ctx.valor(0).getText());
-		        									
-	        	}else	if(variablesTipo.containsKey(ctx.nombre(1).getText()) && ctx.valor(1).getText()!=null) {
-			        return Integer.valueOf(ctx.nombre(1).getText())-Integer.valueOf(ctx.valor(1).getText());
-				        									
-	        	}else if(ctx.valor(0).getText()!=null && ctx.valor(1).getText()!=null) {
-	        		return Integer.valueOf(ctx.valor(0).getText())-Integer.valueOf(ctx.valor(1).getText());
-		        }
-	        break;
-	        case 3:
-	        	if(variablesTipo.containsKey(ctx.nombre(0).getText()) && variablesTipo.containsKey(ctx.nombre(1).getText())) {
-	        		return Integer.valueOf(ctx.nombre(0).getText())*Integer.valueOf(ctx.nombre(1).getText());
-	        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(0).getText()) && ctx.valor(0).getText()!=null) {
-	        		return Integer.valueOf(ctx.nombre(0).getText())*Integer.valueOf(ctx.valor(0).getText());
-	        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(0).getText()) && ctx.valor(1).getText()!=null) {
-		        	return Integer.valueOf(ctx.nombre(0).getText())*Integer.valueOf(ctx.valor(1).getText());
-		        									
-		        }else if(variablesTipo.containsKey(ctx.nombre(1).getText()) && ctx.valor(0).getText()!=null) {
-		        	return Integer.valueOf(ctx.nombre(1).getText())*Integer.valueOf(ctx.valor(0).getText());
-		        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(1).getText()) && ctx.valor(1).getText()!=null) {
-			        return Integer.valueOf(ctx.nombre(1).getText())*Integer.valueOf(ctx.valor(1).getText());
-				        									
-	        	}else if(ctx.valor(0).getText()!=null && ctx.valor(1).getText()!=null) {
-	        		return Integer.valueOf(ctx.valor(0).getText())*Integer.valueOf(ctx.valor(1).getText());
-		        }
-	        break;
-	        case 4:
-	        	if(variablesTipo.containsKey(ctx.nombre(0).getText()) && variablesTipo.containsKey(ctx.nombre(1).getText())) {
-	        		return Integer.valueOf(ctx.nombre(0).getText())/Integer.valueOf(ctx.nombre(1).getText());
-	        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(0).getText()) && ctx.valor(0).getText()!=null) {
-	        		return Integer.valueOf(ctx.nombre(0).getText())/Integer.valueOf(ctx.valor(0).getText());
-	        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(0).getText()) && ctx.valor(1).getText()!=null) {
-		        	return Integer.valueOf(ctx.nombre(0).getText())/Integer.valueOf(ctx.valor(1).getText());
-		        									
-		        }else if(variablesTipo.containsKey(ctx.nombre(1).getText()) && ctx.valor(0).getText()!=null) {
-		        	return Integer.valueOf(ctx.nombre(1).getText())/Integer.valueOf(ctx.valor(0).getText());
-		        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(1).getText()) && ctx.valor(1).getText()!=null) {
-			        return Integer.valueOf(ctx.nombre(1).getText())/Integer.valueOf(ctx.valor(1).getText());
-				        									
-	        	}else if(ctx.valor(0).getText()!=null && ctx.valor(1).getText()!=null) {
-	        		return Integer.valueOf(ctx.valor(0).getText())/Integer.valueOf(ctx.valor(1).getText());
-		        												}
-	        break;
-	        case 5:
-	        	if(variablesTipo.containsKey(ctx.nombre(0).getText()) && variablesTipo.containsKey(ctx.nombre(1).getText())) {
-	        		return Integer.valueOf(ctx.nombre(0).getText())%Integer.valueOf(ctx.nombre(1).getText());
-	        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(0).getText()) && ctx.valor(0).getText()!=null) {
-	        		return Integer.valueOf(ctx.nombre(0).getText())%Integer.valueOf(ctx.valor(0).getText());
-	        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(0).getText()) && ctx.valor(1).getText()!=null) {
-		        	return Integer.valueOf(ctx.nombre(0).getText())%Integer.valueOf(ctx.valor(1).getText());
-		        									
-		        }else if(variablesTipo.containsKey(ctx.nombre(1).getText()) && ctx.valor(0).getText()!=null) {
-		        	return Integer.valueOf(ctx.nombre(1).getText())%Integer.valueOf(ctx.valor(0).getText());
-		        									
-	        	}else if(variablesTipo.containsKey(ctx.nombre(1).getText()) && ctx.valor(1).getText()!=null) {
-			        return Integer.valueOf(ctx.nombre(1).getText())%Integer.valueOf(ctx.valor(1).getText());
-				        									
-	        	}else if(ctx.valor(0).getText()!=null && ctx.valor(1).getText()!=null) {
-	        		return Integer.valueOf(ctx.valor(0).getText())%Integer.valueOf(ctx.valor(1).getText());
-		        }
-	        break;
-	        default:
-	        break;
-	        							
+	public Integer visitOperacion(OperacionContext ctx){
+		Integer num1 = 0;
+		Integer num2 = 0; 
+		Integer resultado = 0;
+	
+		if(ctx.nombre(0) != null) {
+			if(ctx.nombre().size() > 1) {
+				if(!variables.containsKey(ctx.nombre(0).getText())) {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(0).getText() + "' no ha sido declarada");
+				}
+				if(variables.get(ctx.nombre(0).getText()) == "") {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(0).getText() + "' no tiene valor");
+				}
+				if(variablesTipo.get(ctx.nombre(0).getText()) != "ENTERO")
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				
+				num1 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
+				
+				if(!variables.containsKey(ctx.nombre(1).getText())) {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(1).getText() + "' no ha sido declarada");
+				}
+				if(variables.get(ctx.nombre(1).getText()) == "") {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(1).getText() + "' no tiene valor");
+				}
+				if(variablesTipo.get(ctx.nombre(1).getText()) != "ENTERO")
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				num2 = Integer.valueOf(variables.get(ctx.nombre(1).getText()));
+				
+			}
+			
+			else {
+				if(!variables.containsKey(ctx.nombre(0).getText())) {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(0).getText() + "' no ha sido declarada");
+				}
+				if(variables.get(ctx.nombre(0).getText()) == "") {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(0).getText() + "' no tiene valor");
+				}
+				if(variablesTipo.get(ctx.nombre(0).getText()) != "ENTERO")
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				
+				
+				if(ctx.nombre(0) == ctx.getChild(0) ) {
+					num1 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
+				}
+				else if(ctx.nombre(0) == ctx.getChild(2) ) {
+					num1 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
+				}
+			}
+			
+		}
 		
-	        }
+		if(ctx.valor(0) != null) {
+			if(ctx.valor().size() > 1) {
+				if(visitValor(ctx.valor(0)) != 1)
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				if(visitValor(ctx.valor(1)) != 1)
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				
+				
+				num1 = Integer.parseInt(ctx.valor(0).getText());
+				num2 = Integer.parseInt(ctx.valor(1).getText());
+				
+			}
+			
+			else {
+				if(visitValor(ctx.valor(0)) != 1)
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				
+				if(ctx.valor(0) == ctx.getChild(0) ) {
+					num1 = Integer.valueOf(ctx.valor(0).getText());
+				}
+				else if(ctx.valor(0) == ctx.getChild(2) ) {
+					num1 = Integer.valueOf(ctx.valor(2).getText());
+				}
+			}
+			
+		}
+		
+		switch(visitReformular(ctx.reformular())) {
+		case 1:
+			resultado = num1 + num2;
+			break;
+		case 2:
+			resultado = num1 - num2;
+			break;
+		case 3:
+			resultado = num1 * num2;
+			break;
+		case 4:
+			resultado = num1 / num2;
+			break;
+		case 5:
+			resultado = num1 % num2;
+			break;
+		default:
+			throw new IllegalArgumentException("Operacion no valida");
+		
+		}
 
-	        return 0;
+		return resultado;
 	}
 	//-------------- Reformular				-----------//
 	@Override
@@ -326,10 +298,8 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	}
 	//-------------- If					 	-----------//
 	//-------------- Comparar Variables 	-----------//
-	//-------------- Iteracion		 		-----------//
 	//-------------- Iteracion - for		-----------//
 	//-------------- Iteracion - while		-----------//
-	//-------------- Iteracion		 		-----------//
 	//-------------- RECORRER		 		-----------//
 	@Override
 	public Integer visitRecorrer(RecorrerContext ctx){	
