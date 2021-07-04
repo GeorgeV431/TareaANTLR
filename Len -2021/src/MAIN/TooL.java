@@ -14,22 +14,6 @@ import ANTLR.ParserDNDParser;
 public class TooL {
 	
 	public static void main(String[] args)throws Exception {
-		//try{
-		/*ANTLRInputStream input = new ANTLRInputStream(new FileInputStream("example/ejemplo0.txt"));
-		ParserTestLexer lexer = new ParserTestLexer(input);
-        
-        Token tok = lexer.nextToken();
-		while(tok.getType() != Token.EOF)
-		{
-			System.out.println( tok.getType() + ":" +
-					tok.getLine() + ":" +
-					tok.getCharPositionInLine() + ": " +
-					tok.getText());
-			tok = lexer.nextToken();
-		}*/
-    	//}catch (TokenStreamException tse){
-    	//	System.err.println("Error leyendo tokens: " + tse.toString());
-    	//}
         
 		
         ANTLRInputStream input = new ANTLRInputStream(new FileInputStream("example/ejemplo0.txt"));
