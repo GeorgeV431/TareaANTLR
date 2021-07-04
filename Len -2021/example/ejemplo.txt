@@ -1,5 +1,6 @@
 Fabricate
 
+//Declaracion de variables
 StoneShape num = 10;
 DetectGoodAndEvil bool = GOOD;
 Message msg= "warrior";
