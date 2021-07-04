@@ -7,8 +7,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import ANTLR.ParserTestLexer;
-import ANTLR.ParserTestParser;
+import ANTLR.ParserDNDLexer;
+import ANTLR.ParserDNDParser;
 
 
 public class TooL {
@@ -33,9 +33,9 @@ public class TooL {
         
 		
         ANTLRInputStream input = new ANTLRInputStream(new FileInputStream("example/ejemplo0.txt"));
-		ParserTestLexer lexer = new ParserTestLexer(input);
+		ParserDNDLexer lexer = new ParserDNDLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        ParserTestParser parser = new ParserTestParser(tokens);  
+        ParserDNDParser parser = new ParserDNDParser(tokens);  
         ParseTree tree = parser.program();
         MyVisitor eval = new MyVisitor();
         eval.visit(tree);

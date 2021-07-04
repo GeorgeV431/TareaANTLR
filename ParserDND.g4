@@ -1,7 +1,7 @@
 grammar ParserDND;
 import LexerDND;
 
-program: BEGIN LLAVIZQ statement* LLAVDER END;
+program: BEGIN statement* END;
 
 statement: declaracion
 			| asignacion 
@@ -10,7 +10,7 @@ statement: declaracion
 			| pregunta 
 			| operacion
 			| printSentence
-			| comentario ;
+			| comentario;
 
 comentario: COMENTARIOS;
 
