@@ -1,6 +1,7 @@
 package MAIN;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ import ANTLR.ParserDNDParser.ComparacionContext;
 import ANTLR.ParserDNDParser.ConditionContext;
 import ANTLR.ParserDNDParser.DeclaracionContext;
 import ANTLR.ParserDNDParser.FuncionContext;
+import ANTLR.ParserDNDParser.Iter_forContext;
 import ANTLR.ParserDNDParser.Iter_whileContext;
 import ANTLR.ParserDNDParser.OperacionContext;
 import ANTLR.ParserDNDParser.PreguntaContext;
@@ -414,6 +416,35 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	}
 	
 	//-------------- Iteracion - for		-----------//
+	@Override
+	public Integer visitIter_for(Iter_forContext ctx) {
+		String id = ctx.nombre().getText();
+		
+		if(!variables.containsKey(id)) {
+			throw new IllegalArgumentException("Variable '" + id + "' no ha sido declarada");
+		}
+		
+		if(variablesTipo.get(id) != "ENTERO") {
+			throw new IllegalArgumentException("Variable no es StoneShapes.");
+		}
+		
+		variables.replace(id, ctx.NUM().getText());
+		System.out.println("Inicio: "+ctx.NUM().getText());
+		
+		while(visitCondition(ctx.condition()) == 1) {
+			
+			System.out.println("Iterador: "+variables.get(id));
+			
+			for(int j=0; j<ctx.statement().size();j++) {
+				visitStatement(ctx.statement(j));
+			}		
+			
+			variables.replace(id, visitRecorrer(ctx.recorrer()).toString());
+		}
+		return 0;
+	}
+	
+	
 	//-------------- Iteracion - while		-----------//
 	@Override
 	public Integer visitIter_while(Iter_whileContext ctx){
@@ -421,9 +452,7 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 		Integer j=0;
 		while(visitCondition(ctx.condition())==1) {
 			for(i=0;i<ctx.statement().size();i++) {
-
 					visitStatement(ctx.statement(i));
-
 			}	
 		}
 		return 0;
@@ -540,7 +569,7 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 				return 0;
 			}
 	case 6:
-			if(num1>=num2) {
+			if(num1<=num2) {
 				 return 1;
 			}else {
 				return 0;
@@ -557,21 +586,27 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	@Override
 	public Integer visitRecorrer(RecorrerContext ctx){	
 
-	        if (!variablesTipo.containsKey(ctx.nombre(0).getText())) {
+	        if (!variablesTipo.containsKey(ctx.nombre(0).getText())) 
 	        	throw new IllegalArgumentException(ctx.nombre(0).getText()+"No existe");
 	        	
-	        	}else if(variablesTipo.containsKey(ctx.nombre(1).getText())) {
-	        		throw new IllegalArgumentException(ctx.nombre(1).getText()+ "No existe");
+	        if(!variablesTipo.containsKey(ctx.nombre(1).getText())) 
+	        	throw new IllegalArgumentException(ctx.nombre(1).getText()+ "No existe");
 	        		
-	        		}else if(variablesTipo.get(ctx.nombre(0).getText()) != "ENTERO" ) {
-	        			throw new IllegalArgumentException(ctx.nombre(0).getText()+ "No es tipo StoneShape");
+	        if(variablesTipo.get(ctx.nombre(0).getText()) != "ENTERO" ) 
+	        	throw new IllegalArgumentException(ctx.nombre(0).getText()+ "No es tipo StoneShape");
 	        			
-	        			}else if(variablesTipo.get(ctx.nombre(1).getText()) != "ENTERO" ) {
-	        				throw new IllegalArgumentException(ctx.nombre(1).getText()+ "No es tipo StoneShape");
+	        if(variablesTipo.get(ctx.nombre(1).getText()) != "ENTERO" ) 
+	        	throw new IllegalArgumentException(ctx.nombre(1).getText()+ "No es tipo StoneShape");
 	        			
-	        			}else if(ctx.SUMAR()!=null){
-	        				return  Integer.valueOf(variables.get(ctx.nombre(0).getText())+ctx.NUM());
-	        			}
+	        Integer num1 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
+	        Integer suma = Integer.valueOf(ctx.NUM().getText());
+	        
+	        if(ctx.SUMAR()!=null){
+	        	return  num1 + suma;
+	        }
+	        if(ctx.RESTAR()!=null){
+	        	return  num1 - suma;
+	        }
 
 	        return 0;
 	}
