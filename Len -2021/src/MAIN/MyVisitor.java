@@ -24,10 +24,6 @@ import ANTLR.ParserDNDParser.SinElseContext;
 import ANTLR.ParserDNDParser.Tipo_datoContext;
 import ANTLR.ParserDNDParser.ValorContext;
 
-
-
-
-
 public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	private Map<String, String>  variables = new HashMap<String, String>();
 	private Map<String, String>  variablesTipo = new HashMap<String, String>();
@@ -380,6 +376,9 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	//-------------- If					 	-----------//
 	@Override
 	public Integer visitPregunta(PreguntaContext ctx){
+		if(visitCondition(ctx.condition())==1) {
+			visitSinElse(ctx.sinElse());
+		}
 		return 0;
 	}
 		
@@ -411,6 +410,17 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	//-------------- Sinelse		-----------//
 	@Override
 	public Integer visitSinElse(SinElseContext ctx){
+		int i=0;
+		if(ctx.ELSE()==null) {
+			for(i=0;i<ctx.statement().size();i++) {
+				visitStatement(ctx.statement(i));
+				
+			}
+		}
+		for(i=0;i<ctx.statement().size();i++) {
+			visitStatement(ctx.statement(i));
+			
+		}	
 		
 		return 0;
 	}
