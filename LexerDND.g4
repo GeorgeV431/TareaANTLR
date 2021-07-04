@@ -14,8 +14,8 @@ ENTERO:'StoneShape';
 BOOLEAN:'DetectGoodAndEvil';
 STRING: 'Message';
 
-TRUE:'Good';
-FALSE:'Evil';
+TRUE:'GOOD';
+FALSE:'EVIL';
 
 //Lectura e impresion
 PRINTLN:'Sending';

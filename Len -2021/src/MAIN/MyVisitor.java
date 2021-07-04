@@ -3,6 +3,7 @@ package MAIN;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import ANTLR.ParserDNDBaseVisitor;
 import ANTLR.ParserDNDParser.AsignacionContext;
@@ -13,6 +14,7 @@ import ANTLR.ParserDNDParser.FuncionContext;
 import ANTLR.ParserDNDParser.OperacionContext;
 import ANTLR.ParserDNDParser.PreguntaContext;
 import ANTLR.ParserDNDParser.PrintSentenceContext;
+import ANTLR.ParserDNDParser.ReadSentenceContext;
 import ANTLR.ParserDNDParser.RecorrerContext;
 import ANTLR.ParserDNDParser.ReformularContext;
 import ANTLR.ParserDNDParser.SinElseContext;
@@ -211,6 +213,46 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	        return 0;
 	}
 	//-------------- Leer Variables 		-----------//
+	@Override
+	public Integer visitReadSentence(ReadSentenceContext ctx) {
+		String id = ctx.nombre().getText();
+		
+		if(!variables.containsKey(id)) {
+			throw new IllegalArgumentException("Variable '" + id + "' no ha sido declarada");
+		}
+		
+		Scanner myObj = new Scanner(System.in);
+		String valor = "";
+		
+		switch(variablesTipo.get(id)) {
+		case "ENTERO":
+			valor = myObj.nextLine();
+			if(!valor.matches(".*\\d+.*")) {
+				throw new IllegalArgumentException("Valor no valido.");
+			}
+			
+			break;
+		case "BOOLEAN":
+			valor = myObj.nextLine();
+			valor = valor.toUpperCase();
+			if(!valor.equals("GOOD") && !valor.equals("EVIL")) {
+				throw new IllegalArgumentException("Valor no valido.");
+			}
+			break;
+		case "STRING":
+			valor = myObj.nextLine();
+			valor = ("\""+valor+"\"");
+			break;
+		default:
+			throw new IllegalArgumentException("Valor no valido.");
+			
+		}
+				
+		variables.replace(id, valor);
+		return 0;
+	}
+	
+	
 	//-------------- Operar Variables	((valor|nombre) reformular (valor|nombre));	-----------//
 	@Override
 	public Integer visitOperacion(OperacionContext ctx){
