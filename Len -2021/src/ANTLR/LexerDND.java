@@ -42,7 +42,7 @@ public class LexerDND extends Lexer {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'Fabricate'", "'Bane'", "'Symbol'", "'ImmovableObject'", "'StoneShape'", 
-		"'DetectGoodAndEvil'", "'Message'", "'Good'", "'Evil'", "'Sending'", "'ComprehendLanguages'", 
+		"'DetectGoodAndEvil'", "'Message'", "'GOOD'", "'EVIL'", "'Sending'", "'ComprehendLanguages'", 
 		"'Identify'", "'Command'", "'Nondetection'", "'Initiative'", "'Haste'", 
 		"'&&'", "'||'", "'!'", "'+'", "'-'", "'*'", "'/'", "'%'", "'ControlFlames'", 
 		"'ControlWater'", "'ControlWinds'", "'AbsorbElements'", "'='", "'>'", 
@@ -183,9 +183,9 @@ public class LexerDND extends Lexer {
 		"\u00a7\7x\2\2\u00a7\u00a8\7k\2\2\u00a8\u00a9\7n\2\2\u00a9\16\3\2\2\2\u00aa"+
 		"\u00ab\7O\2\2\u00ab\u00ac\7g\2\2\u00ac\u00ad\7u\2\2\u00ad\u00ae\7u\2\2"+
 		"\u00ae\u00af\7c\2\2\u00af\u00b0\7i\2\2\u00b0\u00b1\7g\2\2\u00b1\20\3\2"+
-		"\2\2\u00b2\u00b3\7I\2\2\u00b3\u00b4\7q\2\2\u00b4\u00b5\7q\2\2\u00b5\u00b6"+
-		"\7f\2\2\u00b6\22\3\2\2\2\u00b7\u00b8\7G\2\2\u00b8\u00b9\7x\2\2\u00b9\u00ba"+
-		"\7k\2\2\u00ba\u00bb\7n\2\2\u00bb\24\3\2\2\2\u00bc\u00bd\7U\2\2\u00bd\u00be"+
+		"\2\2\u00b2\u00b3\7I\2\2\u00b3\u00b4\7Q\2\2\u00b4\u00b5\7Q\2\2\u00b5\u00b6"+
+		"\7F\2\2\u00b6\22\3\2\2\2\u00b7\u00b8\7G\2\2\u00b8\u00b9\7X\2\2\u00b9\u00ba"+
+		"\7K\2\2\u00ba\u00bb\7N\2\2\u00bb\24\3\2\2\2\u00bc\u00bd\7U\2\2\u00bd\u00be"+
 		"\7g\2\2\u00be\u00bf\7p\2\2\u00bf\u00c0\7f\2\2\u00c0\u00c1\7k\2\2\u00c1"+
 		"\u00c2\7p\2\2\u00c2\u00c3\7i\2\2\u00c3\26\3\2\2\2\u00c4\u00c5\7E\2\2\u00c5"+
 		"\u00c6\7q\2\2\u00c6\u00c7\7o\2\2\u00c7\u00c8\7r\2\2\u00c8\u00c9\7t\2\2"+

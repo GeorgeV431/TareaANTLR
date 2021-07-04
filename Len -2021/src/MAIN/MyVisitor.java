@@ -11,6 +11,7 @@ import ANTLR.ParserDNDParser.ComparacionContext;
 import ANTLR.ParserDNDParser.ConditionContext;
 import ANTLR.ParserDNDParser.DeclaracionContext;
 import ANTLR.ParserDNDParser.FuncionContext;
+import ANTLR.ParserDNDParser.Iter_whileContext;
 import ANTLR.ParserDNDParser.OperacionContext;
 import ANTLR.ParserDNDParser.PreguntaContext;
 import ANTLR.ParserDNDParser.PrintSentenceContext;
@@ -414,6 +415,19 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	
 	//-------------- Iteracion - for		-----------//
 	//-------------- Iteracion - while		-----------//
+	@Override
+	public Integer visitIter_while(Iter_whileContext ctx){
+		Integer i=0;
+		Integer j=0;
+		while(visitCondition(ctx.condition())==1) {
+			for(i=0;i<ctx.statement().size();i++) {
+
+					visitStatement(ctx.statement(i));
+
+			}	
+		}
+		return 0;
+	}
 	//-------------- Condition		 		-----------//
 	
 	@Override
@@ -497,41 +511,39 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	switch(visitComparacion(ctx.comparacion())) {
 	case 1:
 			if(num1==num2) {
-				
-				System.out.println("es igual");
-				 
+				 return 1;
 			}else {
-				System.out.println("no es igual");
+				return 0;
 			}
 	case 2:
 			if(num1>num2) {
-
+				 return 1;
 			}else {
-
-			}	
+				return 0;
+			}
 	case 3:
 			if(num1<num2) {
-
+				 return 1;
 			}else {
-
-			}	
+				return 0;
+			}
 	case 4:
 			if(num1!=num2) {
-
-			}else {
-
+				 return 1;
+			} {
+				return 0;
 			}
 	case 5:
 			if(num1>=num2) {
-
+				 return 1;
 			}else {
-
+				return 0;
 			}
 	case 6:
 			if(num1>=num2) {
-
+				 return 1;
 			}else {
-
+				return 0;
 			}
 
 	default:

@@ -1,7 +1,30 @@
 Fabricate
-	DetectGoodAndEvil num;
+
+	StoneShape num = 10;
+	DetectGoodAndEvil bool=Good;
+	Message msg= "warrior";
+	Message self;
+	StoneShape num2 = 5;
+	StoneShape num3;
+	StoneShape j=0;
+	StoneShape i=0;
 	
-	ComprehendLanguages(num);
+	Sending("Hello",msg);
+	Sending("ingresa nombre");
+	
+
+	num2 = num+num2;
+
+
+	Haste(num<num2){
+		num=num+1;
+		Sending(num);
+		Identify(){
+		}
+	};
+
+	num2= AbsorbElements(num2);
+	Sending(num2);
 	
 
 Bane
