@@ -1,9 +1,9 @@
 grammar ParserDND;
 import LexerDND;
 
-program: BEGIN LLAVIZQ sentencias* LLAVDER END;
+program: BEGIN LLAVIZQ statement* LLAVDER END;
 
-sentencias: declaracion
+statement: declaracion
 			| asignacion 
 			| readSentence
 			| iteracion
@@ -28,15 +28,15 @@ reformular: SUMAR | RESTAR | DIVIDIR | MULTIPLICAR | RESTO;
 
 pregunta: IF PARIZQ valor comparacion valor PARDER LLAVIZQ sinElse LLAVDER;
 
-sinElse: (sentencias+ LLAVDER ELSE LLAVIZQ sentencias+ | sentencias+);
+sinElse: (statement+ LLAVDER ELSE LLAVIZQ statement+ | statement+);
 
 comparacion: IGUAL | MAYOR | MENOR | NOTIGUAL | MAYORIGUAL | MENORIGUAL;
 
 iteracion: iter_for | iter_while;
 
-iter_while: WHILE PARIZQ condition PARDER LLAVIZQ sentencias+ LLAVDER;
+iter_while: WHILE PARIZQ condition PARDER LLAVIZQ statement+ LLAVDER;
 
-iter_for: FOR PARIZQ ID ES NUM SEMIC condition SEMIC recorrer PARDER LLAVIZQ sentencias+ LLAVDER;
+iter_for: FOR PARIZQ ID ES NUM SEMIC condition SEMIC recorrer PARDER LLAVIZQ statement+ LLAVDER;
 
 condition: valor ( IGUAL | MAYOR | MENOR | NOTIGUAL | MAYORIGUAL | MENORIGUAL ) valor | valor ( IGUAL | MAYOR | MENOR | NOTIGUAL | MAYORIGUAL | MENORIGUAL ) valor AND | valor ( IGUAL | MAYOR | MENOR | NOTIGUAL | MAYORIGUAL | MENORIGUAL ) valor OR ;
 

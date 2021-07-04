@@ -1,3 +1,4 @@
+package ANTLR;
 // Generated from ParserDND.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -23,7 +24,7 @@ public class ParserDNDBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStatement(ParserDNDParser.StatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSentencias(ParserDNDParser.SentenciasContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1,3 +1,4 @@
+package ANTLR;
 // Generated from ParserDND.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -24,13 +25,13 @@ public class ParserDNDParser extends Parser {
 		PARIZQ=38, PARDER=39, LLAVIZQ=40, LLAVDER=41, CORIZQ=42, CORDER=43, COM=44, 
 		COMA=45, NUM=46, ID=47, IDS=48, WS=49, COMENTARIOS=50;
 	public static final int
-		RULE_program = 0, RULE_statement = 1, RULE_comentario = 2, RULE_declaracion = 3, 
+		RULE_program = 0, RULE_sentencias = 1, RULE_comentario = 2, RULE_declaracion = 3, 
 		RULE_asignacion = 4, RULE_readSentence = 5, RULE_printSentence = 6, RULE_operacion = 7, 
 		RULE_reformular = 8, RULE_pregunta = 9, RULE_sinElse = 10, RULE_comparacion = 11, 
 		RULE_iteracion = 12, RULE_iter_while = 13, RULE_iter_for = 14, RULE_condition = 15, 
 		RULE_recorrer = 16, RULE_tipo_dato = 17, RULE_valor = 18, RULE_nombre = 19;
 	public static final String[] ruleNames = {
-		"program", "statement", "comentario", "declaracion", "asignacion", "readSentence", 
+		"program", "sentencias", "comentario", "declaracion", "asignacion", "readSentence", 
 		"printSentence", "operacion", "reformular", "pregunta", "sinElse", "comparacion", 
 		"iteracion", "iter_while", "iter_for", "condition", "recorrer", "tipo_dato", 
 		"valor", "nombre"
@@ -108,11 +109,11 @@ public class ParserDNDParser extends Parser {
 		public TerminalNode LLAVIZQ() { return getToken(ParserDNDParser.LLAVIZQ, 0); }
 		public TerminalNode LLAVDER() { return getToken(ParserDNDParser.LLAVDER, 0); }
 		public TerminalNode END() { return getToken(ParserDNDParser.END, 0); }
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
+		public List<SentenciasContext> sentencias() {
+			return getRuleContexts(SentenciasContext.class);
 		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
+		public SentenciasContext sentencias(int i) {
+			return getRuleContext(SentenciasContext.class,i);
 		}
 		public ProgramContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -143,7 +144,7 @@ public class ParserDNDParser extends Parser {
 				{
 				{
 				setState(42);
-				statement();
+				sentencias();
 				}
 				}
 				setState(47);
@@ -167,7 +168,7 @@ public class ParserDNDParser extends Parser {
 		return _localctx;
 	}
 
-	public static class StatementContext extends ParserRuleContext {
+	public static class SentenciasContext extends ParserRuleContext {
 		public DeclaracionContext declaracion() {
 			return getRuleContext(DeclaracionContext.class,0);
 		}
@@ -192,20 +193,20 @@ public class ParserDNDParser extends Parser {
 		public ComentarioContext comentario() {
 			return getRuleContext(ComentarioContext.class,0);
 		}
-		public StatementContext(ParserRuleContext parent, int invokingState) {
+		public SentenciasContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_statement; }
+		@Override public int getRuleIndex() { return RULE_sentencias; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ParserDNDVisitor ) return ((ParserDNDVisitor<? extends T>)visitor).visitStatement(this);
+			if ( visitor instanceof ParserDNDVisitor ) return ((ParserDNDVisitor<? extends T>)visitor).visitSentencias(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final StatementContext statement() throws RecognitionException {
-		StatementContext _localctx = new StatementContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_statement);
+	public final SentenciasContext sentencias() throws RecognitionException {
+		SentenciasContext _localctx = new SentenciasContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_sentencias);
 		try {
 			setState(59);
 			_errHandler.sync(this);
@@ -764,11 +765,11 @@ public class ParserDNDParser extends Parser {
 		public TerminalNode LLAVDER() { return getToken(ParserDNDParser.LLAVDER, 0); }
 		public TerminalNode ELSE() { return getToken(ParserDNDParser.ELSE, 0); }
 		public TerminalNode LLAVIZQ() { return getToken(ParserDNDParser.LLAVIZQ, 0); }
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
+		public List<SentenciasContext> sentencias() {
+			return getRuleContexts(SentenciasContext.class);
 		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
+		public SentenciasContext sentencias(int i) {
+			return getRuleContext(SentenciasContext.class,i);
 		}
 		public SinElseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -800,7 +801,7 @@ public class ParserDNDParser extends Parser {
 					{
 					{
 					setState(129);
-					statement();
+					sentencias();
 					}
 					}
 					setState(132); 
@@ -820,7 +821,7 @@ public class ParserDNDParser extends Parser {
 					{
 					{
 					setState(137);
-					statement();
+					sentencias();
 					}
 					}
 					setState(140); 
@@ -838,7 +839,7 @@ public class ParserDNDParser extends Parser {
 					{
 					{
 					setState(142);
-					statement();
+					sentencias();
 					}
 					}
 					setState(145); 
@@ -972,11 +973,11 @@ public class ParserDNDParser extends Parser {
 		public TerminalNode PARDER() { return getToken(ParserDNDParser.PARDER, 0); }
 		public TerminalNode LLAVIZQ() { return getToken(ParserDNDParser.LLAVIZQ, 0); }
 		public TerminalNode LLAVDER() { return getToken(ParserDNDParser.LLAVDER, 0); }
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
+		public List<SentenciasContext> sentencias() {
+			return getRuleContexts(SentenciasContext.class);
 		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
+		public SentenciasContext sentencias(int i) {
+			return getRuleContext(SentenciasContext.class,i);
 		}
 		public Iter_whileContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1013,7 +1014,7 @@ public class ParserDNDParser extends Parser {
 				{
 				{
 				setState(160);
-				statement();
+				sentencias();
 				}
 				}
 				setState(163); 
@@ -1054,11 +1055,11 @@ public class ParserDNDParser extends Parser {
 		public TerminalNode PARDER() { return getToken(ParserDNDParser.PARDER, 0); }
 		public TerminalNode LLAVIZQ() { return getToken(ParserDNDParser.LLAVIZQ, 0); }
 		public TerminalNode LLAVDER() { return getToken(ParserDNDParser.LLAVDER, 0); }
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
+		public List<SentenciasContext> sentencias() {
+			return getRuleContexts(SentenciasContext.class);
 		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
+		public SentenciasContext sentencias(int i) {
+			return getRuleContext(SentenciasContext.class,i);
 		}
 		public Iter_forContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1107,7 +1108,7 @@ public class ParserDNDParser extends Parser {
 				{
 				{
 				setState(178);
-				statement();
+				sentencias();
 				}
 				}
 				setState(181); 
