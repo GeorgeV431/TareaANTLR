@@ -40,17 +40,17 @@ public interface ParserDNDVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAsignacion(ParserDNDParser.AsignacionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserDNDParser#leer}.
+	 * Visit a parse tree produced by {@link ParserDNDParser#readSentence}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLeer(ParserDNDParser.LeerContext ctx);
+	T visitReadSentence(ParserDNDParser.ReadSentenceContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserDNDParser#imprimir}.
+	 * Visit a parse tree produced by {@link ParserDNDParser#printSentence}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitImprimir(ParserDNDParser.ImprimirContext ctx);
+	T visitPrintSentence(ParserDNDParser.PrintSentenceContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserDNDParser#operacion}.
 	 * @param ctx the parse tree
@@ -100,11 +100,11 @@ public interface ParserDNDVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIter_for(ParserDNDParser.Iter_forContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserDNDParser#condicion}.
+	 * Visit a parse tree produced by {@link ParserDNDParser#condition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCondicion(ParserDNDParser.CondicionContext ctx);
+	T visitCondition(ParserDNDParser.ConditionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserDNDParser#recorrer}.
 	 * @param ctx the parse tree

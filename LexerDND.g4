@@ -55,12 +55,12 @@ ES:'=';
 MAYOR:'>';
 MENOR:'<';
 IGUAL:'==';
-NOIGUAL:'!=';
-MAYORAL:'>=';
-MENORAL:'<=';
+NOTIGUAL:'!=';
+MAYORIGUAL:'>=';
+MENORIGUAL:'<=';
 
 //Parentesis y signos de puntuacion
-SC:';';
+SEMIC:';';
 PARIZQ:'(';
 PARDER:')';
 LLAVIZQ:'{';
@@ -72,10 +72,8 @@ COMA:',';
 
 //Identificadores
 NUM:[0-9]+;
-
 ID : [a-zA-Z]+ ;  
 IDS : [a-zA-Z_][a-zA-Z0-9]* ;	// match lower-case identifiers
-
 WS : [ \t\r\n]+ -> skip ;		// skip spaces, tabs, newlines
 
 COMENTARIOS: '//' ~[\r\n]* -> skip ;

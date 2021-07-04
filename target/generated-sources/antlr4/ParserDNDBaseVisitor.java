@@ -51,14 +51,14 @@ public class ParserDNDBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLeer(ParserDNDParser.LeerContext ctx) { return visitChildren(ctx); }
+	@Override public T visitReadSentence(ParserDNDParser.ReadSentenceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitImprimir(ParserDNDParser.ImprimirContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPrintSentence(ParserDNDParser.PrintSentenceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -121,7 +121,7 @@ public class ParserDNDBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCondicion(ParserDNDParser.CondicionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCondition(ParserDNDParser.ConditionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
