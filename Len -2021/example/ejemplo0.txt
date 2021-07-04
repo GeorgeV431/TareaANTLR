@@ -11,7 +11,10 @@ Fabricate
 	Sending("Hello",msg);
 	Sending("ingresa nombre");
 	
-
+	Identify(num==10){
+		num=20;
+	};
+	Sending(num);
 	num2 = num+14;
 	Sending(num2);
 	

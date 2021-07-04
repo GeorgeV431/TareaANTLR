@@ -8,11 +8,14 @@ import ANTLR.ParserDNDBaseVisitor;
 import ANTLR.ParserDNDParser.AsignacionContext;
 import ANTLR.ParserDNDParser.ComparacionContext;
 import ANTLR.ParserDNDParser.DeclaracionContext;
+import ANTLR.ParserDNDParser.Iter_whileContext;
 import ANTLR.ParserDNDParser.OperacionContext;
 import ANTLR.ParserDNDParser.PreguntaContext;
 import ANTLR.ParserDNDParser.PrintSentenceContext;
 import ANTLR.ParserDNDParser.RecorrerContext;
 import ANTLR.ParserDNDParser.ReformularContext;
+import ANTLR.ParserDNDParser.SinElseContext;
+import ANTLR.ParserDNDParser.StatementContext;
 import ANTLR.ParserDNDParser.Tipo_datoContext;
 import ANTLR.ParserDNDParser.ValorContext;
 
@@ -301,11 +304,142 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	//-------------- If					 	-----------//
 	@Override
 	public Integer visitPregunta(PreguntaContext ctx){
+		Integer salida=0;
+		Integer num1 = 0;
+		Integer num2 = 0; 
+		Integer resultado = 0;
+	
+		if(ctx.nombre(0) != null) {
+			if(ctx.nombre().size() > 1) {
+				if(!variables.containsKey(ctx.nombre(0).getText())) {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(0).getText() + "' no ha sido declarada");
+				}
+				if(variables.get(ctx.nombre(0).getText()) == "") {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(0).getText() + "' no tiene valor");
+				}
+				if(variablesTipo.get(ctx.nombre(0).getText()) != "ENTERO")
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				
+				num1 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
+				
+				if(!variables.containsKey(ctx.nombre(1).getText())) {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(1).getText() + "' no ha sido declarada");
+				}
+				if(variables.get(ctx.nombre(1).getText()) == "") {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(1).getText() + "' no tiene valor");
+				}
+				if(variablesTipo.get(ctx.nombre(1).getText()) != "ENTERO")
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				num2 = Integer.valueOf(variables.get(ctx.nombre(1).getText()));
+				
+			}
+			
+			else {
+				if(!variables.containsKey(ctx.nombre(0).getText())) {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(0).getText() + "' no ha sido declarada");
+				}
+				if(variables.get(ctx.nombre(0).getText()) == "") {
+					throw new IllegalArgumentException("Variable '" + ctx.nombre(0).getText() + "' no tiene valor");
+				}
+				if(variablesTipo.get(ctx.nombre(0).getText()) != "ENTERO")
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				
+				
+				if(ctx.nombre(0) == ctx.getChild(0) ) {
+					num1 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
+				}
+				else if(ctx.nombre(0) == ctx.getChild(2) ) {
+					num2 = Integer.valueOf(variables.get(ctx.nombre(0).getText()));
+				}
+			}
+			
+		}
 		
+		if(ctx.valor(0) != null) {
+			if(ctx.valor().size() > 1) {
+				if(visitValor(ctx.valor(0)) != 1)
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				if(visitValor(ctx.valor(1)) != 1)
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				
+				
+				num1 = Integer.parseInt(ctx.valor(0).getText());
+				num2 = Integer.parseInt(ctx.valor(1).getText());
+				
+			}
+			
+			else {
+				if(visitValor(ctx.valor(0)) != 1)
+					throw new IllegalArgumentException("Valor no es StoneShapes.");
+				
+				if(ctx.valor(0) == ctx.getChild(0) ) {
+					num1 = Integer.valueOf(ctx.valor(0).getText());
+				}
+				else if(ctx.valor(0) == ctx.getChild(2) ) {
+					num2 = Integer.valueOf(ctx.valor(0).getText());
+				}
+			}
+			
+		}
 		
-		return 0;
+		switch(visitComparacion(ctx.comparacion())) {
+		case 1:
+				if(num1==num2) {
+					
+					visitSinelse(ctx.sinElse());
+					 
+				}else {
 
+				}
+		case 2:
+				if(num1>num2) {
+
+				}else {
+
+				}	
+		case 3:
+				if(num1<num2) {
+
+				}else {
+
+				}	
+		case 4:
+				if(num1!=num2) {
+
+				}else {
+
+				}
+		case 5:
+				if(num1>=num2) {
+
+				}else {
+
+				}
+		case 6:
+				if(num1>=num2) {
+
+				}else {
+
+				}
+
+		default:
+			//throw new IllegalArgumentException("Operacion no valida");
+		}
+
+		return 0;
 	}
+	//-------------- SINELSE		-----------//
+		//@Override <<<------------------------------------------THIS HAPPENED
+		public Integer visitSinelse(SinElseContext ctx){
+			Integer salida=0;
+			for(int indice = 0;indice<ctx.getChildCount();indice++)
+			 {
+				 salida= visitStatement(ctx.statement(indice));
+			 }
+			 
+			 return salida; 
+			
+		}
 	//-------------- Comparar Variables 	-----------//
 	@Override
 	public Integer visitComparacion(ComparacionContext ctx){
@@ -332,8 +466,16 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 
 	}
 	
+	
 	//-------------- Iteracion - for		-----------//
 	//-------------- Iteracion - while		-----------//
+	@Override
+	public Integer visitIter_while(Iter_whileContext ctx){
+		
+	
+		
+		return 1;
+	}
 	//-------------- RECORRER		 		-----------//
 	@Override
 	public Integer visitRecorrer(RecorrerContext ctx){	
@@ -389,6 +531,36 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 		
 		return 0;
 	}
+	
+	@Override 
+	 public Integer visitStatement(StatementContext ctx) { 
+		 Integer salida = 0;
+		 
+		 if(ctx.asignacion()!=null) {
+			 salida = visitAsignacion(ctx.asignacion());
+		 }else if(ctx.operacion()!=null) {
+			 salida = visitOperacion(ctx.operacion());
+		 }else if(ctx.printSentence()!=null) {
+			 salida = visitPrintSentence(ctx.printSentence());
+		 }else if(ctx.pregunta()!=null) {
+			 salida = visitPregunta(ctx.pregunta());
+		 }
+		 
+		 /*for(int indice = 0;indice<list.size();indice++)
+		 {
+			 if(list.get(indice).assign()!=null) {
+				 salida = visitAssign(list.get(indice).assign());
+			 }else if(list.get(indice).add()!=null) {
+				 salida = visitAdd(list.get(indice).add());
+			 }else if(list.get(indice).print()!=null) {
+				 salida = visitPrint(list.get(indice).print());
+			 }else if(list.get(indice).if_block()!=null) {
+				 salida = visitIf_block(list.get(indice).if_block());
+			 }
+		 }*/
+		
+		 return salida; 
+	 }
 	
 	
 }
