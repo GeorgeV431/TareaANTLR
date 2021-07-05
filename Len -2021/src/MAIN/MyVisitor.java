@@ -635,7 +635,7 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 			case 4:
 					if(num1!=num2) {
 						 return 1;
-					} {
+					}else {
 						return 0;
 					}
 			case 5:
