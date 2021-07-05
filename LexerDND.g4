@@ -3,12 +3,6 @@ lexer grammar LexerDND;
 BEGIN: 'Fabricate' ;
 END:'Bane';
 
-//Variables
-VAR:'Symbol';
-
-//Constantes
-CONST:'ImmovableObject';
-
 //3 tipos de datos
 ENTERO:'StoneShape';
 BOOLEAN:'DetectGoodAndEvil';
@@ -33,7 +27,10 @@ WHILE:'Haste';
 //2 Operadores logicos
 AND:'&&';
 OR:'||';
-NOT: '!';
+
+//Constantes
+CRITICO: '20';
+FALLO:	'1';
 
 //Operadores matematicos basicos
 SUMAR:'+';

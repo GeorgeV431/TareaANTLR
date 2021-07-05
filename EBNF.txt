@@ -1,0 +1,51 @@
+digito 		::== '0' | '1' | ... | '8' | '9'
+caracter 	::== 'a' | 'b' | ... | 'y' | 'z' | 'A' | 'B' | ... | 'Y' | 'Z'
+boolean 	::== 'GOOD' | 'EVIL'
+
+signoComparador ::== '=' | '>' | '<' | '==' | '!=' | '>=' | '<='
+signoMatematico ::== '+' | '-' | '*' | '/' | '%'  
+
+critico ::== '20'
+fallo 	::== '1'
+
+coseno 	 ::== 'ControlFlames'
+seno 	 ::== 'ControlWater'
+tangente ::== 'ControlWinds'
+absoluto ::== 'AbsorbElements'
+
+num 	::== digito+
+string 	::== '"' caracter+[digito+] '"'
+
+idVariable ::== caracter+[digito+]
+
+StoneShape 			::== num
+DetectGoodAndEvil 	::== boolean
+Message 			::== string
+
+tipoDeDato 		::== 'StoneShape' | 'DetectGoodAndEvil' | 'Message'
+valor			::== StoneShape | DetectGoodAndEvil | Message
+
+
+programa		::== 'Fabricate' sentencia* 'Bane'
+
+sentencia		::== (imprimir | leer | declaracion | asignacion | if | while | for | comentario) ';'
+
+imprimir		::== 'Sending(' valor[',' idVariable ] ')'  | 'Sending(' idVariable ')'
+leer			::== 'ComprehendLanguages(' idVariable ')' 
+
+declaracion		::== tipoDeDato asignacion | tipoDeDato idVariable
+asignacion		::== idVariable '=' ( (idVariable | valor) | operacion | funcionMatematica )
+
+if 				::== 'Identify(' condicion '){' sentencia+ '}' [else]
+else			::== 'Nondetection{' sentencia+ '}'
+condicion 		::== (idVariable | valor) signoComparador (idVariable | valor) [('&&' | '||') condicion]
+
+operacion 			::== (idVariable | valor) signoMatematico (idVariable | valor)
+funcionMatematica	::== nombreFuncion '(' (idVariable | valor) ')'
+nombreFuncion		::== coseno | sento | tangente | absoluto
+
+while			::== 'Haste(' condicion '){' sentencia+ '}'
+for				::== 'Initiative(' idVariable '=' num ';' condicion ';' idVariable '=' idVariable ('+'|'-') num '){' sentencia+ '}'
+
+comentario		::== '//' {caracter}
+

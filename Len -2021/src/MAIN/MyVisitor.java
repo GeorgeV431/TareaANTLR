@@ -1,8 +1,6 @@
 package MAIN;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -21,7 +19,6 @@ import ANTLR.ParserDNDParser.PrintSentenceContext;
 import ANTLR.ParserDNDParser.ReadSentenceContext;
 import ANTLR.ParserDNDParser.RecorrerContext;
 import ANTLR.ParserDNDParser.ReformularContext;
-import ANTLR.ParserDNDParser.SinElseContext;
 import ANTLR.ParserDNDParser.Tipo_datoContext;
 import ANTLR.ParserDNDParser.ValorContext;
 
@@ -228,6 +225,7 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 		case "ENTERO":
 			valor = myObj.nextLine();
 			if(!valor.matches(".*\\d+.*")) {
+				myObj.close();
 				throw new IllegalArgumentException("Valor no valido.");
 			}
 			
@@ -235,7 +233,9 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 		case "BOOLEAN":
 			valor = myObj.nextLine();
 			valor = valor.toUpperCase();
+			
 			if(!valor.equals("GOOD") && !valor.equals("EVIL")) {
+				myObj.close();
 				throw new IllegalArgumentException("Valor no valido.");
 			}
 			break;
@@ -244,11 +244,13 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 			valor = ("\""+valor+"\"");
 			break;
 		default:
+			myObj.close();
 			throw new IllegalArgumentException("Valor no valido.");
 			
 		}
 				
 		variables.replace(id, valor);
+		myObj.close();
 		return 0;
 	}
 	
@@ -457,7 +459,6 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 	@Override
 	public Integer visitIter_while(Iter_whileContext ctx){
 		Integer i=0;
-		Integer j=0;
 		while(visitCondition(ctx.condition())==1) {
 			for(i=0;i<ctx.statement().size();i++) {
 					visitStatement(ctx.statement(i));
