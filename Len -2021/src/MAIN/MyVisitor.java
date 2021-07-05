@@ -609,97 +609,100 @@ public class MyVisitor extends ParserDNDBaseVisitor<Integer> {
 		throw new IllegalArgumentException("Variables no son del mismo tipo.");
 	
 	
-	switch(tipo1) {
-		case "ENTERO":
+	Integer retorno = 0;
+	
+	if (tipo1 == "ENTERO"){
 			Integer num1 = Integer.valueOf(valor1);
 			Integer num2 = Integer.valueOf(valor2);
+
 			switch(visitComparacion(ctx.comparacion())) {
 			case 1:
+
 					if(num1==num2) {
-						 return 1;
+						 retorno = 1;
 					}else {
-						return 0;
+						retorno = 0;
 					}
+					break;
 			case 2:
 					if(num1>num2) {
-						 return 1;
+						retorno = 1;
 					}else {
-						return 0;
+						retorno = 0;
 					}
+					break;
 			case 3:
 					if(num1<num2) {
-						 return 1;
+						retorno = 1;
 					}else {
-						return 0;
+						retorno = 0;
 					}
+					break;
 			case 4:
 					if(num1!=num2) {
-						 return 1;
+						retorno = 1;
 					}else {
-						return 0;
+						retorno = 0;
 					}
+					break;
 			case 5:
 					if(num1>=num2) {
-						 return 1;
+						retorno = 1;
 					}else {
-						return 0;
+						retorno = 0;
 					}
+					break;
 			case 6:
 					if(num1<=num2) {
-						 return 1;
+						retorno = 1;
 					}else {
-						return 0;
+						retorno = 0;
 					}
+					break;
 			}
-	 	   break;
-	 	   
-	    case "BOOLEAN":
-	    	if(visitComparacion(ctx.comparacion()) != 1 && visitComparacion(ctx.comparacion()) != 4) {
-	    		throw new IllegalArgumentException("Comparacion no valida para Tipo de Variable."); 
-	    	}
-	    	
-	    	if(visitComparacion(ctx.comparacion()) == 1) {
-	    		if(valor1.equals(valor2))
-	    			return 1;
-	    		else
-	    			return 0;
-	    	}
-	    	
-	    	if(visitComparacion(ctx.comparacion()) == 4) {
-	    		if(!valor1.equals(valor2))
-	    			return 1;
-	    		else
-	    			return 0;
-	    	}
-	    	
-	    	break;
-	 	   
-	    case "STRING":
-	    	if(visitComparacion(ctx.comparacion()) != 1 && visitComparacion(ctx.comparacion()) != 4) {
-	    		throw new IllegalArgumentException("Comparacion no valida para Tipo de Variable."); 
-	    	}
-	    	
-	    	if(visitComparacion(ctx.comparacion()) == 1) {
-	    		if(valor1.equals(valor2))
-	    			return 1;
-	    		else
-	    			return 0;
-	    	}
-	    	
-	    	if(visitComparacion(ctx.comparacion()) == 4) {
-	    		if(!valor1.equals(valor2))
-	    			return 1;
-	    		else
-	    			return 0;
-	    	}
-	    	
-	 	   break;
+	}else {
+		
+		if(visitComparacion(ctx.comparacion()) != 1 && visitComparacion(ctx.comparacion()) != 4) {
+    		throw new IllegalArgumentException("Comparacion no valida para Tipo de Variable."); 
+    	}
+    	
+    	if(visitComparacion(ctx.comparacion()) == 1) {
+    		if(valor1.equals(valor2))
+    			retorno = 1;
+    		else
+    			retorno = 0;
+    	}
+    	
+    	if(visitComparacion(ctx.comparacion()) == 4) {
+    		if(!valor1.equals(valor2))
+    			retorno = 1;
+    		else
+    			retorno = 0;
+    	}
+		
+	}
+	Integer condicionExtra = 1;
+	if(ctx.condition() != null) {
+		condicionExtra = visitCondition(ctx.condition());
+	}
 	
+	if(ctx.AND() != null) {
+		if( retorno == 1 && condicionExtra == 1)
+			retorno = 1;
+		else
+			retorno = 0;
+	}
+	if(ctx.OR() != null) {
+		if( retorno == 1 || condicionExtra == 1)
+			retorno = 1;
+		else
+			retorno = 0;
 	}
 	
 	
 
-	return 0;
+
+	return retorno;
 }
 
 	//-------------- RECORRER		 		-----------//

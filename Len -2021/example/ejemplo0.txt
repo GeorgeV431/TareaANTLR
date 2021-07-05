@@ -1,18 +1,11 @@
 Fabricate
 	
-	StoneShape num1 = 0;
+	StoneShape num1;
 	StoneShape num2 = 2;
+	StoneShape num3 = 3;
 	
-	
-	
-	Identify( num1 == num2 ){
-		
-		Sending( "num 1 == num 2");
-		
-	}Nondetection{
-		
-		Sending( "num 1 != num 2");
-	
+	Identify( num2 == 3 && num3 == 3 ){
+		Sending( "Es verdad");
 	};
 	
 

@@ -15,7 +15,7 @@ public class TooL {
 	public static void main(String[] args)throws Exception {
         
 		
-		ANTLRInputStream input = new ANTLRInputStream(new FileInputStream("example/ejemplo.txt"));
+		ANTLRInputStream input = new ANTLRInputStream(new FileInputStream("example/ejemplo0.txt"));
 		ParserDNDLexer lexer = new ParserDNDLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ParserDNDParser parser = new ParserDNDParser(tokens);  
